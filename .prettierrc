@@ -1,0 +1,45 @@
+{
+  "overrides": [
+    {
+      "files": "*.{js,jsx}",
+      "options": {
+        "arrowParens": "always",
+        "jsxSingleQuote": false,
+        "jsxBracketSameLine": false,
+        "singleQuote": true,
+        "semi": true,
+        "bracketSpacing": true,
+        "useTabs": false,
+        "tabWidth": 2,
+        "trailingComma": "all",
+        "printWidth": 80,
+        "endOfLine": "auto"
+      }
+    },
+    {
+      "files": "*.{ts,tsx}",
+      "options": {
+        "arrowParens": "always",
+        "jsxSingleQuote": false,
+        "jsxBracketSameLine": false,
+        "singleQuote": true,
+        "semi": true,
+        "bracketSpacing": true,
+        "useTabs": false,
+        "tabWidth": 2,
+        "trailingComma": "all",
+        "printWidth": 120,
+        "endOfLine": "auto"
+      }
+    },
+    {
+      "files": "*.{css,scss,sass,less}",
+      "options": {
+        "singleQuote": false,
+        "semi": true,
+        "useTabs": true,
+        "tabWidth": 1
+      }
+    }
+  ]
+}

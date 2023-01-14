@@ -1,0 +1,23 @@
+{
+  "root": true,
+  "plugins": ["prettier"],
+  "extends": ["eslint:recommended", "plugin:prettier/recommended"],
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module"
+  },
+  "env": {
+    "node": true,
+    "commonjs": true,
+    "es2021": true
+  },
+  "globals": {
+    "NodeJS": true,
+    "Express": true
+  },
+  "rules": {
+    "no-async-promise-executor": 0,
+    "no-unused-vars": 0,
+    "no-case-declarations": 0
+  }
+}

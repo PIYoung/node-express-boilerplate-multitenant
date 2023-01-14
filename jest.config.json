@@ -1,0 +1,25 @@
+{
+  "displayName": {
+    "name": "my-app",
+    "color": "blue"
+  },
+  "verbose": true,
+  "testEnvironment": "node",
+  "testEnvironmentOptions": {
+    "NODE_ENV": "test"
+  },
+  "setupFiles": ["<rootDir>/test/setup-dotenv.js"],
+  "setupFilesAfterEnv": ["<rootDir>/test/setup-jest.js"],
+  "restoreMocks": true,
+  "coverageDirectory": "./coverage",
+  "coveragePathIgnorePatterns": ["<rootDir>/node_modules/", "<rootDir>/test/"],
+  "coverageReporters": ["json", "html", "text", "clover"],
+  "coverageThreshold": {
+    "global": {
+      "branches": 80,
+      "functions": 80,
+      "lines": 80,
+      "statements": 80
+    }
+  }
+}

@@ -1,0 +1,5 @@
+# eslint ignore test files
+**/*.spec.js
+setup-db.js
+setup-dotenv.js
+setup-jest.js
