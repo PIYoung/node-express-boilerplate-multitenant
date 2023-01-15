@@ -1,8 +1,7 @@
-import app from './config/express.config.js';
-
-const port = process.env.PORT;
+import app from './configs/express.config.js';
 
 function bootstrap() {
+  const port = process.env.PORT;
   const sever = app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
   });
