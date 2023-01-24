@@ -1,5 +1,5 @@
 version: "3"
-name: "my-app-production"
+name: "my-app-local"
 services:
   my-app:
     container_name: my-app

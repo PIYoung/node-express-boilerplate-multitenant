@@ -1,0 +1,10 @@
+FROM postgres:12.7
+
+LABEL version="1.0.0"
+LABEL maintainer="PIYoung(https://github.com/PIYoung)"
+
+WORKDIR /.
+
+ADD database/postgres.d/init.sql /docker-entrypoint-initdb.d/
+
+RUN chmod 755 /docker-entrypoint-initdb.d/init.sql
