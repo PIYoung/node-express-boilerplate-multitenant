@@ -1,6 +1,6 @@
 import express from 'express';
 
-import v1Router from '../routes/v1/index.js';
+import v1Router from './v1';
 
 const { APP_NAME } = process.env;
 const router = express.Router();
