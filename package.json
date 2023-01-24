@@ -3,6 +3,9 @@
   "author": "PIYoung (https://github.com/PIYoung)",
   "version": "1.0.0",
   "description": "node express postgres boilerplate for multitenant",
+  "license": "MIT",
+  "main": "src/server.ts",
+  "sideEffects": false,
   "homepage": "https://github.com/PIYoung/node-express-boilerplate-multitenant#readme",
   "repository": {
     "type": "git",
@@ -12,6 +15,9 @@
     "url": "https://github.com/PIYoung/node-express-boilerplate-multitenant/issues"
   },
   "scripts": {
+    "start": "node -r dotenv/config dist/src/server.js dotenv_config_path=.env.production --exec babel-node",
+    "start:dev": "nodemon -r dotenv/config src/server.js dotenv_config_path=.env.development",
+    "build": "tsc -p tsconfig.json",
     "test": "jest -i --colors --detectOpenHandles",
     "test:unit": "jest -i --colors --detectOpenHandles --testMatch=\"<rootDir>/test/unit/**/*.spec.js\"",
     "test:e2e": "jest -i --colors --detectOpenHandles --testMatch=\"<rootDir>/test/e2e/**/*.spec.js\"",
