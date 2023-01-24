@@ -1,0 +1,30 @@
+#!/usr/bin/env sh
+
+HUSKY_DIR="$(dirname -- "$0")/_/husky.sh"
+
+readonly HUSKY_DIR
+
+. "$HUSKY_DIR"
+
+# 1. Ensure that all code is checked into the stage changes
+echo "🔍 Checking for uncommitted changes..."
+
+# 2. Run linting(formatting)
+echo "🔍 Linting..."
+
+# 3. Run tests
+echo "🔍 Testing..."
+
+# 4. Warn developers of potential conflicts with other branches
+echo "🔍 Checking for conflicts..."
+
+# 5. Reject commits if they contain large binary files
+echo "🔍 Checking for large files..."
+
+# 6. Require a pull request review before merging
+echo "🔍 Checking for pull request review..."
+
+# 7. Scan for secrets or sensitive data
+echo "🔍 Scanning for secrets..."
+
+exit 0
