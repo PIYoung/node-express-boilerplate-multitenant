@@ -8,8 +8,8 @@
   "testEnvironmentOptions": {
     "NODE_ENV": "test"
   },
-  "setupFiles": ["<rootDir>/test/setup-dotenv.js"],
-  "setupFilesAfterEnv": ["<rootDir>/test/setup-jest.js"],
+  "setupFiles": ["<rootDir>/test/setup-dotenv.ts"],
+  "setupFilesAfterEnv": ["<rootDir>/test/setup-jest.ts"],
   "restoreMocks": true,
   "coverageDirectory": "./coverage",
   "coveragePathIgnorePatterns": ["<rootDir>/node_modules/", "<rootDir>/test/"],

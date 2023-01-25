@@ -15,8 +15,8 @@
     "url": "https://github.com/PIYoung/node-express-boilerplate-multitenant/issues"
   },
   "scripts": {
-    "start": "node -r dotenv/config dist/src/server.js dotenv_config_path=.env.production --exec babel-node",
-    "start:dev": "nodemon -r dotenv/config src/server.js dotenv_config_path=.env.development",
+    "start": "node -r dotenv/config dist/src/server.js dotenv_config_path=.env.production",
+    "start:dev": "nodemon -r dotenv/config src/server.ts dotenv_config_path=.env.development",
     "build": "tsc -p tsconfig.json",
     "test": "jest -i --colors --detectOpenHandles",
     "test:unit": "jest -i --colors --detectOpenHandles --testMatch=\"<rootDir>/test/unit/**/*.spec.js\"",
@@ -25,7 +25,7 @@
     "test:coverage": "jest -i --coverage",
     "prepare": "husky install",
     "pretty": "prettier --write \"./**/*.{js,jsx,json,ts,tsx}\"",
-    "lint": "eslint --ignore-path .gitignore --ext .js src/"
+    "lint": "eslint --ignore-path .gitignore --ext .ts src/"
   },
   "dependencies": {
     "compression": "^1.7.4",
