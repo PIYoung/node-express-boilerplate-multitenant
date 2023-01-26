@@ -1,4 +1,4 @@
-import app from './configs/express.config.js';
+import app from './configs/express.config';
 
 function bootstrap() {
   const { PORT: port } = process.env;
