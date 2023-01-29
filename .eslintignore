@@ -1,5 +1,2 @@
 # eslint ignore test files
-**/*.spec.ts
-setup-db.ts
-setup-dotenv.ts
-setup-jest.ts
+node_modules

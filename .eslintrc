@@ -19,5 +19,22 @@
     "no-async-promise-executor": 0,
     "no-unused-vars": 0,
     "no-case-declarations": 0
-  }
+  },
+  "overrides": [
+    {
+      "plugins": ["jest"],
+      "extends": ["plugin:jest/recommended"],
+      "files": ["test/**/*.spec.js", "test/setup-*.js"],
+      "env": {
+        "jest": true
+      },
+      "rules": {
+        "jest/no-disabled-tests": 0,
+        "jest/no-focused-tests": 0,
+        "jest/no-identical-title": 0,
+        "jest/prefer-to-have-length": 0,
+        "jest/valid-expect": 0
+      }
+    }
+  ]
 }
