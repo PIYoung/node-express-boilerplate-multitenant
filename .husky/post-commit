@@ -5,3 +5,7 @@ HUSKY_DIR="$(dirname -- "$0")/_/husky.sh"
 readonly HUSKY_DIR
 
 . "$HUSKY_DIR"
+
+# 8. Enfore signed-off commits
+
+exit 0
