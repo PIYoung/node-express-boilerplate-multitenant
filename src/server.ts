@@ -1,6 +1,6 @@
 import app from './configs/express.config';
 
-function bootstrap() {
+async function bootstrap() {
   const { PORT: port } = process.env;
 
   app.listen(port, () => {
