@@ -5,5 +5,5 @@ readonly HUSKY_DIR
 
 . "$HUSKY_DIR"
 
-echo "🔍 Linting commit-msg..."
-npx --no-install commitlint --edit $1
+echo "🔍 Prepare-commit-msg..."
+exec < /dev/tty && node_modules/.bin/cz --hook || true
