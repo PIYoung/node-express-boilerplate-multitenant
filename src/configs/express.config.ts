@@ -5,7 +5,7 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import passport from 'passport';
 
-import apiRouter from '../routes/index.js';
+import apiRouter from '../routes';
 
 const app = express();
 
@@ -21,5 +21,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(passport.initialize());
 
 app.use('/', apiRouter);
+
+app.use('/', (_req, res) => {
+  res.status(200).send('<h1>Express + TypeScript Server</h1>');
+});
 
 export default app;

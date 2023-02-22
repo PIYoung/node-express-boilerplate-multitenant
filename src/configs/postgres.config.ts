@@ -1,8 +1,10 @@
 import { Options, Sequelize } from 'sequelize';
 
-import logger from './logger.config.js';
+import logger from './logger.config';
 
 export const connectPostgres = async () => {
+  logger.info('🔌 Connecting to Postgres...');
+
   const {
     POSTGRES_HOST: host,
     POSTGRES_PORT: port,
@@ -16,7 +18,13 @@ export const connectPostgres = async () => {
     username,
     password,
     database,
+    dialect: 'postgres',
+    define: {
+      paranoid: true,
+      timestamps: true,
+    },
   };
+
   const seq = new Sequelize({
     ...config,
   });
