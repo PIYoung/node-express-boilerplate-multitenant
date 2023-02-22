@@ -2,12 +2,12 @@ version: "3"
 name: "my-app-local"
 services:
   my-app:
-    container_name: my-app
-    image: my-app
+    container_name: my-app-local
+    image: my-app-local
     build:
       context: ../../../
       dockerfile: ci/docker/dockerfiles/Dockerfile
-      target: production
+      target: local
     ports:
       - "${APP_DOCKER_HOST_PORT}:${PORT}"
     volumes:
@@ -17,15 +17,15 @@ services:
       postgres:
         condition: service_healthy
   postgres:
-    container_name: postgres
-    image: postgres:12.7
+    container_name: my-app-local-postgres
+    image: my-app-postgres
     build:
       context: ../../../
       dockerfile: ci/docker/dockerfiles/Dockerfile.postgre
     volumes:
       - ../../../data/postgres:/var/lib/postgresql/data
     ports:
-      - "${POSTGRES_DOCKER_HOST_PORT}:{POSTGRES_PORT}"
+      - "${POSTGRES_DOCKER_HOST_PORT}:${POSTGRES_PORT}"
     environment:
       POSTGRES_USER: "${POSTGRES_USER}"
       POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"

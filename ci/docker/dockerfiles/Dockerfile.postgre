@@ -1,4 +1,4 @@
-FROM postgres:12.7
+FROM postgres:15.1-alpine
 
 LABEL version="1.0.0"
 LABEL maintainer="PIYoung(https://github.com/PIYoung)"

@@ -16,23 +16,3 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-  postgres:
-    container_name: postgres
-    image: postgres:12.7
-    build:
-      context: ../../../
-      dockerfile: ci/docker/dockerfiles/Dockerfile.postgre
-    volumes:
-      - ../../../data/postgres:/var/lib/postgresql/data
-    ports:
-      - "${POSTGRES_DOCKER_HOST_PORT}:{POSTGRES_PORT}"
-    environment:
-      POSTGRES_USER: "${POSTGRES_USER}"
-      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
-      POSTGRES_DATABASE: "${POSTGRES_DATABASE}"
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      timeout: 20s
-      interval: 5s
-      start_period: 5s
-      retries: 5
