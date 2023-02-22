@@ -1,7 +1,12 @@
 {
   "root": true,
   "plugins": ["prettier"],
-  "extends": ["eslint:recommended", "plugin:prettier/recommended"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:prettier/recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 2020,
     "sourceType": "module"
@@ -16,15 +21,21 @@
     "Express": true
   },
   "rules": {
-    "no-async-promise-executor": 0,
     "no-unused-vars": 0,
-    "no-case-declarations": 0
+    "no-async-promise-executor": 0,
+    "no-case-declarations": 0,
+    "@typescript-eslint/no-explicit-any": 0,
+    "@typescript-eslint/no-unused-vars": 0
   },
   "overrides": [
     {
       "plugins": ["jest"],
       "extends": ["plugin:jest/recommended"],
-      "files": ["test/**/*.spec.js", "test/setup-*.js"],
+      "files": [
+        "tests/**/*.spec.ts",
+        "tests/setup-*.ts",
+        "tests/teardown-*.ts"
+      ],
       "env": {
         "jest": true
       },
