@@ -105,7 +105,7 @@ my-app
 
 MIT License
 
-Copyright (c) 2023 PIYoung([https://github.com/PIYoung])
+Copyright (c) 2023 [PIYoung](https://github.com/PIYoung)
 
 [contributors-shield]: https://img.shields.io/github/contributors/PIYoung/node-express-boilerplate-multitenant.svg?style=for-the-badge
 [contributors-url]: https://github.com/PIYoung/node-express-boilerplate-multitenant/graphs/contributors
