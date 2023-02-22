@@ -8,13 +8,17 @@
   "testEnvironmentOptions": {
     "NODE_ENV": "test"
   },
-  "roots": ["<rootDir>/src", "<rootDir>/test"],
-  "setupFiles": ["<rootDir>/test/setup-dotenv.ts"],
-  "setupFilesAfterEnv": ["<rootDir>/test/setup-jest.ts"],
+  "roots": ["<rootDir>/src", "<rootDir>/tests"],
+  "setupFiles": ["<rootDir>/tests/setup-dotenv.ts"],
+  "setupFilesAfterEnv": ["<rootDir>/tests/setup-jest.ts"],
   "watchPathIgnorePatterns": ["<rootDir>/node_modules"],
+  "globalSetup": "<rootDir>/tests/setup-global.ts",
+  "globalTeardown": "<rootDir>/tests/teardown-global.ts",
   "restoreMocks": true,
-  "coverageDirectory": "./coverage",
-  "coveragePathIgnorePatterns": ["<rootDir>/node_modules/", "<rootDir>/test/"],
+  "collectCoverageFrom": ["<rootDir>/src/**/*.ts"],
+  "coverageProvider": "v8",
+  "coverageDirectory": "<rootDir>/coverage",
+  "coveragePathIgnorePatterns": ["<rootDir>/node_modules/"],
   "coverageReporters": ["json", "html", "text", "clover"],
   "coverageThreshold": {
     "global": {
