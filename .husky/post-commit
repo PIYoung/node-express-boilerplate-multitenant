@@ -7,5 +7,12 @@ readonly HUSKY_DIR
 . "$HUSKY_DIR"
 
 # 8. Enfore signed-off commits
+echo "🔍 Checking for signed-off commits..."
+signed_off_by="$(git log -1 HEAD | grep -w 'Signed-off-by:' | sed -e 's/Signed-off-by: //g')"
+if [ -z "$signed_off_by" ]; then
+  git reset HEAD^
+  echo "You must sign off your commits. Please run 'git commit --signoff' and try again."
+  exit 1
+fi
 
 exit 0

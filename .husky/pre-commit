@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
+exec >/dev/tty 2>&1 
 
 HUSKY_DIR="$(dirname -- "$0")/_/husky.sh"
 
@@ -7,24 +8,73 @@ readonly HUSKY_DIR
 . "$HUSKY_DIR"
 
 # 1. Ensure that all code is checked into the stage changes
-echo "🔍 Checking for uncommitted changes..."
+# echo "🔍 Checking for uncommitted changes..."
+# change_files=""
+# for file in $(git diff --name-only); do
+#   if [ "$file" != ".git/workflows/*" ]; then
+#     change_files="$change_files $file"
+#   fi
+# done
+
+# if [ -n "$change_files" ]; then
+#   echo "You have uncommitted changes. Please commit or stash them before running this script."
+#   exit 1
+# fi
 
 # 2. Run linting(formatting)
 echo "🔍 Linting..."
+npm run lint:staged
 
 # 3. Run tests
 echo "🔍 Testing..."
+# docker exec my-app-test-app npm run test --abort-on-container-exit
 
 # 4. Warn developers of potential conflicts with other branches
-echo "🔍 Checking for conflicts..."
+# echo "🔍 Checking for conflicts..."
+# git fetch
+# git rebase origin/main
 
 # 5. Reject commits if they contain large binary files
 echo "🔍 Checking for large files..."
+# Maximum file size limit in bytes
+limit=$((10 * 1000 * 1000)) # Default 10MB
+
+# Move to the repo root so git files paths make sense
+repo_root=$(git rev-parse --show-toplevel)
+cd "$repo_root" || exit 1
+
+empty_tree=$(git hash-object -t tree /dev/null)
+
+if git rev-parse --verify HEAD >/dev/null 2>&1; then
+  against=HEAD
+else
+  against="$empty_tree"
+fi
+
+should_fail=false
+for file in $(git diff-index --cached --name-only "$against"); do
+  if [ ! -f "$file" ]; then
+    continue
+  fi
+
+  file_size=$(git cat-file -s ":$file")
+  if [ "$file_size" -gt "$limit" ]; then
+    echo File "$file" is $(("$file_size" / (1000000))) MB, which is larger than our configured limit of $(("$limit" / (1000000))) MB
+    should_fail=true
+  fi
+done
+
+if $should_fail; then
+  echo "You have large files in your commit. Please remove them and try again."
+  exit 1
+fi
 
 # 6. Require a pull request review before merging
-echo "🔍 Checking for pull request review..."
+# echo "🔍 Checking for pull request review..."
 
 # 7. Scan for secrets or sensitive data
-echo "🔍 Scanning for secrets..."
+# echo "🔍 Scanning for secrets..."
+# @TODO git secrets --install
+# git secrets --scan
 
 exit 0
