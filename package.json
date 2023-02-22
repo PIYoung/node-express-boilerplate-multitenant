@@ -15,8 +15,8 @@
     "url": "https://github.com/PIYoung/node-express-boilerplate-multitenant/issues"
   },
   "scripts": {
-    "start": "node -r dotenv/config dist/src/server.js dotenv_config_path=.env.production",
-    "start:dev": "nodemon -r dotenv/config src/server.ts dotenv_config_path=.env.development",
+    "start": "cross-env NODE_ENV=production node dist/src/server.js",
+    "start:dev": "cross-env NODE_ENV=development nodemon --exec ts-node src/server.ts",
     "build": "tsc -p tsconfig.json",
     "test": "jest -i --colors --detectOpenHandles",
     "test:unit": "node --expose-gc node_modules/.bin/jest -i --colors --logHeapUsage --detectOpenHandles --testMatch=\"<rootDir>/tests/unit/**/*.spec.ts\"",
