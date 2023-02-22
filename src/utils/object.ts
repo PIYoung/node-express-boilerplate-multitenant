@@ -1,4 +1,4 @@
-export function isEmpty(value: any) {
+export function isEmpty(value: object | string | null | undefined) {
   if (
     value == '' ||
     value == null ||
@@ -11,11 +11,11 @@ export function isEmpty(value: any) {
   return false;
 }
 
-export function isNotEmpty(value: any) {
+export function isNotEmpty(value: object) {
   return !isEmpty(value);
 }
 
-export function pick(object: any, keys: string[]) {
+export function pick(object: { [key: string]: any }, keys: string[]) {
   return keys.reduce((obj, key) => {
     if (isNotEmpty(object[key])) {
       obj[key] = object[key];
