@@ -1,17 +1,5 @@
 import { Optional } from 'sequelize';
-import {
-  Table,
-  Column,
-  Model,
-  DataType,
-  CreatedAt,
-  UpdatedAt,
-  DeletedAt,
-  AutoIncrement,
-  PrimaryKey,
-  AllowNull,
-  HasMany,
-} from 'sequelize-typescript';
+import * as SQLZ from 'sequelize-typescript';
 
 import { User } from './user.model';
 
@@ -28,32 +16,30 @@ interface TenantAttributes {
 type TenantOmitAttributes = 'id' | 'createdAt' | 'updatedAt' | 'deletedAt';
 type TenantCreationAttributes = Optional<TenantAttributes, TenantOmitAttributes>;
 
-@Table({
-  modelName: 'Tenant',
-})
-export class Tenant extends Model<TenantAttributes, TenantCreationAttributes> {
-  @PrimaryKey
-  @AutoIncrement
-  @Column(DataType.INTEGER)
+@SQLZ.Table
+export class Tenant extends SQLZ.Model<TenantAttributes, TenantCreationAttributes> {
+  @SQLZ.PrimaryKey
+  @SQLZ.AutoIncrement
+  @SQLZ.Column(SQLZ.DataType.INTEGER)
   override readonly id!: number;
 
-  @AllowNull(false)
-  @Column(DataType.STRING)
+  @SQLZ.AllowNull(false)
+  @SQLZ.Column(SQLZ.DataType.STRING)
   readonly name!: string;
 
-  @AllowNull(false)
-  @Column(DataType.STRING)
+  @SQLZ.AllowNull(false)
+  @SQLZ.Column(SQLZ.DataType.STRING)
   readonly description!: string;
 
-  @CreatedAt
+  @SQLZ.CreatedAt
   override readonly createdAt!: Date;
 
-  @UpdatedAt
+  @SQLZ.UpdatedAt
   override readonly updatedAt!: Date;
 
-  @DeletedAt
+  @SQLZ.DeletedAt
   override readonly deletedAt!: Date;
 
-  @HasMany(() => User)
+  @SQLZ.HasMany(() => User)
   readonly users?: User[];
 }
