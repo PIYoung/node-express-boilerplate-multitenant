@@ -1,7 +1,9 @@
-import { Sequelize } from 'sequelize';
+import { Sequelize } from 'sequelize-typescript';
 
-const TENANT = {};
+import { ALL_SCHEMAS, createSchema, TenantSchema } from '../../configs/schema.config';
 
-export async function generateTenant(seq: Sequelize, schema: string) {
-  await seq.createSchema(schema, { logging: false });
+export async function generateTenantModels(seq: Sequelize, schema: TenantSchema) {
+  await createSchema(seq, schema);
+
+  ALL_SCHEMAS[schema] = schema;
 }
