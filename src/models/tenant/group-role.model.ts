@@ -1,18 +1,18 @@
 import { Optional } from 'sequelize';
 import * as SQLZ from 'sequelize-typescript';
 
-interface UserInfoAttributes {
+interface GroupRoleAttributes {
   id: number;
   createdAt: Date;
   updatedAt: Date;
   deletedAt?: Date;
 }
 
-type UserInfoOmitAttributes = 'id' | 'createdAt' | 'updatedAt' | 'deletedAt';
-type UserInfoCreationAttributes = Optional<UserInfoAttributes, UserInfoOmitAttributes>;
+type GroupRoleOmitAttributes = 'id' | 'createdAt' | 'updatedAt' | 'deletedAt';
+type GroupRoleCreationAttributes = Optional<GroupRoleAttributes, GroupRoleOmitAttributes>;
 
 @SQLZ.Table
-export class UserInfo extends SQLZ.Model<UserInfoAttributes, UserInfoCreationAttributes> {
+export class GroupRole extends SQLZ.Model<GroupRoleAttributes, GroupRoleCreationAttributes> {
   @SQLZ.PrimaryKey
   @SQLZ.AutoIncrement
   @SQLZ.Column(SQLZ.DataType.INTEGER)
