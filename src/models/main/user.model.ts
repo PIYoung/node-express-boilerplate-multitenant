@@ -1,20 +1,7 @@
 import { Optional } from 'sequelize';
-import {
-  Table,
-  Column,
-  Model,
-  DataType,
-  CreatedAt,
-  UpdatedAt,
-  DeletedAt,
-  PrimaryKey,
-  AutoIncrement,
-  AllowNull,
-  Unique,
-  BelongsTo,
-  ForeignKey,
-} from 'sequelize-typescript';
+import * as SQLZ from 'sequelize-typescript';
 
+import { generateHash } from '../../utils';
 import { Tenant } from './tenant.model';
 
 interface UserAttributes {
@@ -28,40 +15,43 @@ interface UserAttributes {
   tenant: Tenant;
 }
 
-type UserOmitAttributes = 'id' | 'createdAt' | 'updatedAt' | 'deletedAt';
+type UserOmitAttributes = 'id' | 'createdAt' | 'updatedAt' | 'deletedAt' | 'tenant';
 type UserCreationAttributes = Optional<UserAttributes, UserOmitAttributes>;
 
-@Table({
-  modelName: 'User',
-})
-export class User extends Model<UserAttributes, UserCreationAttributes> {
-  @PrimaryKey
-  @AutoIncrement
-  @Column(DataType.INTEGER)
+@SQLZ.Table
+export class User extends SQLZ.Model<UserAttributes, UserCreationAttributes> {
+  @SQLZ.PrimaryKey
+  @SQLZ.AutoIncrement
+  @SQLZ.Column(SQLZ.DataType.INTEGER)
   override readonly id!: number;
 
-  @AllowNull(false)
-  @Unique(true)
-  @Column(DataType.STRING)
+  @SQLZ.AllowNull(false)
+  @SQLZ.Unique(true)
+  @SQLZ.Column(SQLZ.DataType.STRING)
   readonly userId!: string;
 
-  @AllowNull(false)
-  @Column(DataType.STRING)
+  @SQLZ.AllowNull(false)
+  @SQLZ.Column({
+    type: SQLZ.DataType.STRING,
+    set(val: string) {
+      this.setDataValue('password', generateHash(val));
+    },
+  })
   readonly password!: string;
 
-  @ForeignKey(() => Tenant)
-  @Column(DataType.INTEGER)
+  @SQLZ.ForeignKey(() => Tenant)
+  @SQLZ.Column(SQLZ.DataType.INTEGER)
   readonly tenantId!: number;
 
-  @CreatedAt
+  @SQLZ.CreatedAt
   override readonly createdAt!: Date;
 
-  @UpdatedAt
+  @SQLZ.UpdatedAt
   override readonly updatedAt!: Date;
 
-  @DeletedAt
+  @SQLZ.DeletedAt
   override readonly deletedAt?: Date;
 
-  @BelongsTo(() => Tenant)
+  @SQLZ.BelongsTo(() => Tenant)
   readonly tenant!: Tenant;
 }
