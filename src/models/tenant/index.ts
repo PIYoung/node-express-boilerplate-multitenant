@@ -1,23 +1,67 @@
+import { DEFAULT_MAIN_SCHEMA, getTenantSchema } from './../../configs/schema.config';
 import { ModelCtor, Sequelize } from 'sequelize-typescript';
 
-import { ALL_SCHEMAS, createSchema, TenantSchema } from '../../configs/schema.config';
+import { ALL_SCHEMAS, createSchema } from '../../configs/schema.config';
+import { Tenant } from '../main/tenant.model';
+import { Comment } from './comment.model';
 import { GroupRole } from './group-role.model';
+import { GroupUser } from './group-user.model';
 import { Group } from './group.model';
+import { PermissionRole } from './permission-role.model';
+import { Permission } from './permission.model';
+import { Post } from './post.model';
+import { Role } from './role.model';
 import { UserInfo } from './user-info.model';
 import { UserRole } from './user-role.model';
 
-export async function generateTenantModels(seq: Sequelize, schema: TenantSchema) {
+const syncModels = async (seq: Sequelize, tenant: Tenant) => {
+  const tenantId = tenant.id;
+  const schema = getTenantSchema(tenantId);
+  const models: ModelCtor[] = [
+    Comment,
+    GroupRole,
+    GroupUser,
+    Group,
+    PermissionRole,
+    Permission,
+    Post,
+    Role,
+    UserInfo,
+    UserRole,
+  ];
+
   await createSchema(seq, schema);
 
   ALL_SCHEMAS[schema] = schema;
 
-  const models: ModelCtor[] = [GroupRole, Group, UserInfo, UserRole];
-
   seq.addModels(models);
 
-  models.forEach((model) => {
-    model.options.schema = schema;
+  for (const model of models) {
+    await model.schema(schema).sync();
+  }
+
+  for (const model of models) {
+    await model.schema(schema).sync({ alter: true });
+  }
+};
+
+export const generateTenantModels = async (seq: Sequelize, tenantName: string, tenantDescription: string) => {
+  const tenant = await Tenant.schema(DEFAULT_MAIN_SCHEMA).create({
+    name: tenantName,
+    description: tenantDescription,
   });
 
-  await seq.sync({ alter: true });
-}
+  await syncModels(seq, tenant);
+};
+
+export const generateDefaultTenantModels = async (seq: Sequelize) => {
+  const tenant = await Tenant.schema(DEFAULT_MAIN_SCHEMA).findOrCreate({
+    where: { id: 1 },
+    defaults: {
+      name: 'Default Tenant',
+      description: 'Default Tenant',
+    },
+  });
+
+  await syncModels(seq, tenant[0]);
+};
