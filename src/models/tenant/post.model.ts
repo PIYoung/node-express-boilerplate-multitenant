@@ -5,6 +5,7 @@ import { UserInfo } from './user-info.model';
 
 interface PostAttributes {
   id: number;
+  content: string;
   userInfoId: number;
   createdAt: Date;
   updatedAt: Date;
@@ -21,6 +22,10 @@ export class Post extends SQLZ.Model<PostAttributes, PostCreationAttributes> {
   @SQLZ.AutoIncrement
   @SQLZ.Column(SQLZ.DataType.INTEGER)
   override readonly id!: number;
+
+  @SQLZ.AllowNull(false)
+  @SQLZ.Column(SQLZ.DataType.STRING)
+  readonly content!: string;
 
   @SQLZ.ForeignKey(() => UserInfo)
   @SQLZ.Column(SQLZ.DataType.INTEGER)
