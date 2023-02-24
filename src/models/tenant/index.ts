@@ -1,7 +1,6 @@
-import { DEFAULT_MAIN_SCHEMA, getTenantSchema } from './../../configs/schema.config';
 import { ModelCtor, Sequelize } from 'sequelize-typescript';
 
-import { ALL_SCHEMAS, createSchema } from '../../configs/schema.config';
+import { ALL_SCHEMAS, DEFAULT_MAIN_SCHEMA, getTenantSchema, createSchema } from '../../configs/schema.config';
 import { Tenant } from '../main/tenant.model';
 import { Comment } from './comment.model';
 import { GroupRole } from './group-role.model';

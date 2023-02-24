@@ -1,8 +1,8 @@
 import * as SQLZ from 'sequelize-typescript';
 import { Optional } from 'sequelize';
 
-import { generateHash } from '../../utils';
 import { DEFAULT_MAIN_SCHEMA as schema } from '../../configs/schema.config';
+import { generateHash } from '../../utils';
 import { Tenant } from './tenant.model';
 
 interface UserAttributes {
