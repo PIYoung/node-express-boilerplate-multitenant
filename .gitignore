@@ -15,6 +15,9 @@
 # !!! You have to remove this line !!!
 # !!! WARNING !!!
 
+# dummy files
+.DS_Store
+
 # docker volume
 data
 
