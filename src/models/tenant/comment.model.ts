@@ -6,6 +6,7 @@ import { UserInfo } from './user-info.model';
 
 interface CommentAttributes {
   id: number;
+  content: string;
   postId: number;
   userInfoId: number;
   createdAt: Date;
