@@ -1,7 +1,8 @@
-import { Optional } from 'sequelize';
 import * as SQLZ from 'sequelize-typescript';
+import { Optional } from 'sequelize';
 
 import { generateHash } from '../../utils';
+import { DEFAULT_MAIN_SCHEMA as schema } from '../../configs/schema.config';
 import { Tenant } from './tenant.model';
 
 interface UserAttributes {
@@ -18,7 +19,7 @@ interface UserAttributes {
 type UserOmitAttributes = 'id' | 'createdAt' | 'updatedAt' | 'deletedAt' | 'tenant';
 type UserCreationAttributes = Optional<UserAttributes, UserOmitAttributes>;
 
-@SQLZ.Table
+@SQLZ.Table({ tableName: 'user', modelName: 'user', schema })
 export class User extends SQLZ.Model<UserAttributes, UserCreationAttributes> {
   @SQLZ.PrimaryKey
   @SQLZ.AutoIncrement
