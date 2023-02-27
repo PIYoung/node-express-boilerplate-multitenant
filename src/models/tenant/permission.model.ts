@@ -66,7 +66,7 @@ export class Permission extends SQLZ_TS.Model<PermissionAttributes, PermissionCr
   static async write(
     schema: TenantSchema,
     values: PermissionCreationAttributes,
-    options: SQLZ.CreateOptions<SQLZ.Attributes<Permission>>,
+    options?: SQLZ.CreateOptions<SQLZ.Attributes<Permission>>,
   ): Promise<Permission> {
     return this.schema(schema)
       .create(values, {
@@ -82,7 +82,7 @@ export class Permission extends SQLZ_TS.Model<PermissionAttributes, PermissionCr
   static async readOne(
     schema: TenantSchema,
     id: number,
-    options: Omit<SQLZ.FindOptions<PermissionAttributes>, 'where'>,
+    options?: Omit<SQLZ.FindOptions<PermissionAttributes>, 'where'>,
   ): Promise<Permission | null> {
     return this.schema(schema)
       .findByPk(id, {
@@ -99,7 +99,7 @@ export class Permission extends SQLZ_TS.Model<PermissionAttributes, PermissionCr
   static async readAll(
     schema: TenantSchema,
     query: ListQuery,
-    options: SQLZ.FindOptions<SQLZ.Attributes<Permission>>,
+    options?: SQLZ.FindOptions<SQLZ.Attributes<Permission>>,
   ): Promise<Permission[]> {
     let { page, count, sort, dir } = query;
 
@@ -127,7 +127,7 @@ export class Permission extends SQLZ_TS.Model<PermissionAttributes, PermissionCr
     schema: TenantSchema,
     id: number,
     values: PermissionAttributes,
-    options: Omit<SQLZ.UpdateOptions<SQLZ.Attributes<Permission>>, 'returning' | 'where'>,
+    options?: Omit<SQLZ.UpdateOptions<SQLZ.Attributes<Permission>>, 'returning' | 'where'>,
   ): Promise<[number, Permission[]]> {
     return this.schema(schema)
       .update(values, {
@@ -144,7 +144,7 @@ export class Permission extends SQLZ_TS.Model<PermissionAttributes, PermissionCr
   static async remove(
     schema: TenantSchema,
     id: number,
-    options: SQLZ.DestroyOptions<SQLZ.Attributes<Permission>>,
+    options?: SQLZ.DestroyOptions<SQLZ.Attributes<Permission>>,
   ): Promise<number> {
     return this.schema(schema)
       .destroy({

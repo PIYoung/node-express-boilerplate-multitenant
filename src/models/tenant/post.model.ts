@@ -49,7 +49,7 @@ export class Post extends SQLZ_TS.Model<PostAttributes, PostCreationAttributes> 
   static async write(
     schema: TenantSchema,
     values: PostCreationAttributes,
-    options: SQLZ.CreateOptions<SQLZ.Attributes<Post>>,
+    options?: SQLZ.CreateOptions<SQLZ.Attributes<Post>>,
   ): Promise<Post> {
     return this.schema(schema)
       .create(values, {
@@ -65,7 +65,7 @@ export class Post extends SQLZ_TS.Model<PostAttributes, PostCreationAttributes> 
   static async readOne(
     schema: TenantSchema,
     id: number,
-    options: Omit<SQLZ.FindOptions<PostAttributes>, 'where'>,
+    options?: Omit<SQLZ.FindOptions<PostAttributes>, 'where'>,
   ): Promise<Post | null> {
     return this.schema(schema)
       .findByPk(id, {
@@ -82,7 +82,7 @@ export class Post extends SQLZ_TS.Model<PostAttributes, PostCreationAttributes> 
   static async readAll(
     schema: TenantSchema,
     query: ListQuery,
-    options: SQLZ.FindOptions<SQLZ.Attributes<Post>>,
+    options?: SQLZ.FindOptions<SQLZ.Attributes<Post>>,
   ): Promise<Post[]> {
     let { page, count, sort, dir } = query;
 
@@ -110,7 +110,7 @@ export class Post extends SQLZ_TS.Model<PostAttributes, PostCreationAttributes> 
     schema: TenantSchema,
     id: number,
     values: PostAttributes,
-    options: Omit<SQLZ.UpdateOptions<SQLZ.Attributes<Post>>, 'returning' | 'where'>,
+    options?: Omit<SQLZ.UpdateOptions<SQLZ.Attributes<Post>>, 'returning' | 'where'>,
   ): Promise<[number, Post[]]> {
     return this.schema(schema)
       .update(values, {
@@ -127,7 +127,7 @@ export class Post extends SQLZ_TS.Model<PostAttributes, PostCreationAttributes> 
   static async remove(
     schema: TenantSchema,
     id: number,
-    options: SQLZ.DestroyOptions<SQLZ.Attributes<Post>>,
+    options?: SQLZ.DestroyOptions<SQLZ.Attributes<Post>>,
   ): Promise<number> {
     return this.schema(schema)
       .destroy({

@@ -44,7 +44,7 @@ export class Group extends SQLZ_TS.Model<GroupAttributes, GroupCreationAttribute
   static async write(
     schema: TenantSchema,
     values: GroupCreationAttributes,
-    options: SQLZ.CreateOptions<SQLZ.Attributes<Group>>,
+    options?: SQLZ.CreateOptions<SQLZ.Attributes<Group>>,
   ): Promise<Group> {
     return this.schema(schema)
       .create(values, {
@@ -60,7 +60,7 @@ export class Group extends SQLZ_TS.Model<GroupAttributes, GroupCreationAttribute
   static async readOne(
     schema: TenantSchema,
     id: number,
-    options: Omit<SQLZ.FindOptions<GroupAttributes>, 'where'>,
+    options?: Omit<SQLZ.FindOptions<GroupAttributes>, 'where'>,
   ): Promise<Group | null> {
     return this.schema(schema)
       .findByPk(id, {
@@ -77,7 +77,7 @@ export class Group extends SQLZ_TS.Model<GroupAttributes, GroupCreationAttribute
   static async readAll(
     schema: TenantSchema,
     query: ListQuery,
-    options: SQLZ.FindOptions<SQLZ.Attributes<Group>>,
+    options?: SQLZ.FindOptions<SQLZ.Attributes<Group>>,
   ): Promise<Group[]> {
     let { page, count, sort, dir } = query;
 
@@ -105,7 +105,7 @@ export class Group extends SQLZ_TS.Model<GroupAttributes, GroupCreationAttribute
     schema: TenantSchema,
     id: number,
     values: GroupAttributes,
-    options: Omit<SQLZ.UpdateOptions<SQLZ.Attributes<Group>>, 'returning' | 'where'>,
+    options?: Omit<SQLZ.UpdateOptions<SQLZ.Attributes<Group>>, 'returning' | 'where'>,
   ): Promise<[number, Group[]]> {
     return this.schema(schema)
       .update(values, {
@@ -122,7 +122,7 @@ export class Group extends SQLZ_TS.Model<GroupAttributes, GroupCreationAttribute
   static async remove(
     schema: TenantSchema,
     id: number,
-    options: SQLZ.DestroyOptions<SQLZ.Attributes<Group>>,
+    options?: SQLZ.DestroyOptions<SQLZ.Attributes<Group>>,
   ): Promise<number> {
     return this.schema(schema)
       .destroy({

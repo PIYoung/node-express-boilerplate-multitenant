@@ -59,7 +59,7 @@ export class Comment extends SQLZ_TS.Model<CommentAttributes, CommentCreationAtt
   static async write(
     schema: TenantSchema,
     values: CommentCreationAttributes,
-    options: SQLZ.CreateOptions<SQLZ.Attributes<Comment>>,
+    options?: SQLZ.CreateOptions<SQLZ.Attributes<Comment>>,
   ): Promise<Comment> {
     return this.schema(schema)
       .create(values, {
@@ -75,7 +75,7 @@ export class Comment extends SQLZ_TS.Model<CommentAttributes, CommentCreationAtt
   static async readOne(
     schema: TenantSchema,
     id: number,
-    options: Omit<SQLZ.FindOptions<CommentAttributes>, 'where'>,
+    options?: Omit<SQLZ.FindOptions<CommentAttributes>, 'where'>,
   ): Promise<Comment | null> {
     return this.schema(schema)
       .findByPk(id, {
@@ -92,7 +92,7 @@ export class Comment extends SQLZ_TS.Model<CommentAttributes, CommentCreationAtt
   static async readAll(
     schema: TenantSchema,
     query: ListQuery,
-    options: SQLZ.FindOptions<SQLZ.Attributes<Comment>>,
+    options?: SQLZ.FindOptions<SQLZ.Attributes<Comment>>,
   ): Promise<Comment[]> {
     let { page, count, sort, dir } = query;
 
@@ -120,7 +120,7 @@ export class Comment extends SQLZ_TS.Model<CommentAttributes, CommentCreationAtt
     schema: TenantSchema,
     id: number,
     values: CommentAttributes,
-    options: Omit<SQLZ.UpdateOptions<SQLZ.Attributes<Comment>>, 'returning' | 'where'>,
+    options?: Omit<SQLZ.UpdateOptions<SQLZ.Attributes<Comment>>, 'returning' | 'where'>,
   ): Promise<[number, Comment[]]> {
     return this.schema(schema)
       .update(values, {
@@ -137,7 +137,7 @@ export class Comment extends SQLZ_TS.Model<CommentAttributes, CommentCreationAtt
   static async remove(
     schema: TenantSchema,
     id: number,
-    options: SQLZ.DestroyOptions<SQLZ.Attributes<Comment>>,
+    options?: SQLZ.DestroyOptions<SQLZ.Attributes<Comment>>,
   ): Promise<number> {
     return this.schema(schema)
       .destroy({

@@ -58,7 +58,7 @@ export class GroupRole extends SQLZ_TS.Model<GroupRoleAttributes, GroupRoleCreat
   static async write(
     schema: TenantSchema,
     values: GroupRoleCreationAttributes,
-    options: SQLZ.CreateOptions<SQLZ.Attributes<GroupRole>>,
+    options?: SQLZ.CreateOptions<SQLZ.Attributes<GroupRole>>,
   ): Promise<GroupRole> {
     return this.schema(schema)
       .create(values, {
@@ -74,7 +74,7 @@ export class GroupRole extends SQLZ_TS.Model<GroupRoleAttributes, GroupRoleCreat
   static async readOne(
     schema: TenantSchema,
     id: number,
-    options: Omit<SQLZ.FindOptions<GroupRoleAttributes>, 'where'>,
+    options?: Omit<SQLZ.FindOptions<GroupRoleAttributes>, 'where'>,
   ): Promise<GroupRole | null> {
     return this.schema(schema)
       .findByPk(id, {
@@ -91,7 +91,7 @@ export class GroupRole extends SQLZ_TS.Model<GroupRoleAttributes, GroupRoleCreat
   static async readAll(
     schema: TenantSchema,
     query: ListQuery,
-    options: SQLZ.FindOptions<SQLZ.Attributes<GroupRole>>,
+    options?: SQLZ.FindOptions<SQLZ.Attributes<GroupRole>>,
   ): Promise<GroupRole[]> {
     let { page, count, sort, dir } = query;
 
@@ -119,7 +119,7 @@ export class GroupRole extends SQLZ_TS.Model<GroupRoleAttributes, GroupRoleCreat
     schema: TenantSchema,
     id: number,
     values: GroupRoleAttributes,
-    options: Omit<SQLZ.UpdateOptions<SQLZ.Attributes<GroupRole>>, 'returning' | 'where'>,
+    options?: Omit<SQLZ.UpdateOptions<SQLZ.Attributes<GroupRole>>, 'returning' | 'where'>,
   ): Promise<[number, GroupRole[]]> {
     return this.schema(schema)
       .update(values, {
@@ -136,7 +136,7 @@ export class GroupRole extends SQLZ_TS.Model<GroupRoleAttributes, GroupRoleCreat
   static async remove(
     schema: TenantSchema,
     id: number,
-    options: SQLZ.DestroyOptions<SQLZ.Attributes<GroupRole>>,
+    options?: SQLZ.DestroyOptions<SQLZ.Attributes<GroupRole>>,
   ): Promise<number> {
     return this.schema(schema)
       .destroy({

@@ -56,7 +56,7 @@ export class GroupUser extends SQLZ_TS.Model<GroupUserAttributes, GroupUserCreat
   static async write(
     schema: TenantSchema,
     values: GroupUserCreationAttributes,
-    options: SQLZ.CreateOptions<SQLZ.Attributes<GroupUser>>,
+    options?: SQLZ.CreateOptions<SQLZ.Attributes<GroupUser>>,
   ): Promise<GroupUser> {
     return this.schema(schema)
       .create(values, {
@@ -72,7 +72,7 @@ export class GroupUser extends SQLZ_TS.Model<GroupUserAttributes, GroupUserCreat
   static async readOne(
     schema: TenantSchema,
     id: number,
-    options: Omit<SQLZ.FindOptions<GroupUserAttributes>, 'where'>,
+    options?: Omit<SQLZ.FindOptions<GroupUserAttributes>, 'where'>,
   ): Promise<GroupUser | null> {
     return this.schema(schema)
       .findByPk(id, {
@@ -89,7 +89,7 @@ export class GroupUser extends SQLZ_TS.Model<GroupUserAttributes, GroupUserCreat
   static async readAll(
     query: ListQuery,
     schema: TenantSchema,
-    options: SQLZ.FindOptions<SQLZ.Attributes<GroupUser>>,
+    options?: SQLZ.FindOptions<SQLZ.Attributes<GroupUser>>,
   ): Promise<GroupUser[]> {
     let { page, count, sort, dir } = query;
 
@@ -117,7 +117,7 @@ export class GroupUser extends SQLZ_TS.Model<GroupUserAttributes, GroupUserCreat
     schema: TenantSchema,
     id: number,
     values: GroupUserAttributes,
-    options: Omit<SQLZ.UpdateOptions<SQLZ.Attributes<GroupUser>>, 'returning' | 'where'>,
+    options?: Omit<SQLZ.UpdateOptions<SQLZ.Attributes<GroupUser>>, 'returning' | 'where'>,
   ): Promise<[number, GroupUser[]]> {
     return this.schema(schema)
       .update(values, {
@@ -134,7 +134,7 @@ export class GroupUser extends SQLZ_TS.Model<GroupUserAttributes, GroupUserCreat
   static async remove(
     schema: TenantSchema,
     id: number,
-    options: SQLZ.DestroyOptions<SQLZ.Attributes<GroupUser>>,
+    options?: SQLZ.DestroyOptions<SQLZ.Attributes<GroupUser>>,
   ): Promise<number> {
     return this.schema(schema)
       .destroy({

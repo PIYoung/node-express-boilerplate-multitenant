@@ -54,7 +54,7 @@ export class UserRole extends SQLZ_TS.Model<UserRoleAttributes, UserRoleCreation
   static async write(
     schema: TenantSchema,
     values: UserRoleCreationAttributes,
-    options: SQLZ.CreateOptions<SQLZ.Attributes<UserRole>>,
+    options?: SQLZ.CreateOptions<SQLZ.Attributes<UserRole>>,
   ): Promise<UserRole> {
     return this.schema(schema)
       .create(values, {
@@ -70,7 +70,7 @@ export class UserRole extends SQLZ_TS.Model<UserRoleAttributes, UserRoleCreation
   static async readOne(
     schema: TenantSchema,
     id: number,
-    options: Omit<SQLZ.FindOptions<UserRoleAttributes>, 'where'>,
+    options?: Omit<SQLZ.FindOptions<UserRoleAttributes>, 'where'>,
   ): Promise<UserRole | null> {
     return this.schema(schema)
       .findByPk(id, {
@@ -87,7 +87,7 @@ export class UserRole extends SQLZ_TS.Model<UserRoleAttributes, UserRoleCreation
   static async readAll(
     schema: TenantSchema,
     query: ListQuery,
-    options: SQLZ.FindOptions<SQLZ.Attributes<UserRole>>,
+    options?: SQLZ.FindOptions<SQLZ.Attributes<UserRole>>,
   ): Promise<UserRole[]> {
     let { page, count, sort, dir } = query;
 
@@ -115,7 +115,7 @@ export class UserRole extends SQLZ_TS.Model<UserRoleAttributes, UserRoleCreation
     schema: TenantSchema,
     id: number,
     values: UserRoleAttributes,
-    options: Omit<SQLZ.UpdateOptions<SQLZ.Attributes<UserRole>>, 'returning' | 'where'>,
+    options?: Omit<SQLZ.UpdateOptions<SQLZ.Attributes<UserRole>>, 'returning' | 'where'>,
   ): Promise<[number, UserRole[]]> {
     return this.schema(schema)
       .update(values, {
@@ -132,7 +132,7 @@ export class UserRole extends SQLZ_TS.Model<UserRoleAttributes, UserRoleCreation
   static async remove(
     schema: TenantSchema,
     id: number,
-    options: SQLZ.DestroyOptions<SQLZ.Attributes<UserRole>>,
+    options?: SQLZ.DestroyOptions<SQLZ.Attributes<UserRole>>,
   ): Promise<number> {
     return this.schema(schema)
       .destroy({

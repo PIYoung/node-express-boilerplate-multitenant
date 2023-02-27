@@ -56,7 +56,7 @@ export class PermissionRole extends SQLZ_TS.Model<PermissionRoleAttributes, Perm
   static async write(
     schema: TenantSchema,
     values: PermissionRoleCreationAttributes,
-    options: SQLZ.CreateOptions<SQLZ.Attributes<PermissionRole>>,
+    options?: SQLZ.CreateOptions<SQLZ.Attributes<PermissionRole>>,
   ): Promise<PermissionRole> {
     return this.schema(schema)
       .create(values, {
@@ -72,7 +72,7 @@ export class PermissionRole extends SQLZ_TS.Model<PermissionRoleAttributes, Perm
   static async readOne(
     schema: TenantSchema,
     id: number,
-    options: Omit<SQLZ.FindOptions<PermissionRoleAttributes>, 'where'>,
+    options?: Omit<SQLZ.FindOptions<PermissionRoleAttributes>, 'where'>,
   ): Promise<PermissionRole | null> {
     return this.schema(schema)
       .findByPk(id, {
@@ -89,7 +89,7 @@ export class PermissionRole extends SQLZ_TS.Model<PermissionRoleAttributes, Perm
   static async readAll(
     schema: TenantSchema,
     query: ListQuery,
-    options: SQLZ.FindOptions<SQLZ.Attributes<PermissionRole>>,
+    options?: SQLZ.FindOptions<SQLZ.Attributes<PermissionRole>>,
   ): Promise<PermissionRole[]> {
     let { page, count, sort, dir } = query;
 
@@ -117,7 +117,7 @@ export class PermissionRole extends SQLZ_TS.Model<PermissionRoleAttributes, Perm
     schema: TenantSchema,
     id: number,
     values: PermissionRoleAttributes,
-    options: Omit<SQLZ.UpdateOptions<SQLZ.Attributes<PermissionRole>>, 'returning' | 'where'>,
+    options?: Omit<SQLZ.UpdateOptions<SQLZ.Attributes<PermissionRole>>, 'returning' | 'where'>,
   ): Promise<[number, PermissionRole[]]> {
     return this.schema(schema)
       .update(values, {
@@ -134,7 +134,7 @@ export class PermissionRole extends SQLZ_TS.Model<PermissionRoleAttributes, Perm
   static async remove(
     schema: TenantSchema,
     id: number,
-    options: SQLZ.DestroyOptions<SQLZ.Attributes<PermissionRole>>,
+    options?: SQLZ.DestroyOptions<SQLZ.Attributes<PermissionRole>>,
   ): Promise<number> {
     return this.schema(schema)
       .destroy({

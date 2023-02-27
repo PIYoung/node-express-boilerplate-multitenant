@@ -48,7 +48,7 @@ export class Tenant extends SQLZ_TS.Model<TenantAttributes, TenantCreationAttrib
 
   static async write(
     values: TenantCreationAttributes,
-    options: SQLZ.CreateOptions<SQLZ.Attributes<Tenant>>,
+    options?: SQLZ.CreateOptions<SQLZ.Attributes<Tenant>>,
   ): Promise<Tenant> {
     return this.schema(schema)
       .create(values, {
@@ -61,7 +61,10 @@ export class Tenant extends SQLZ_TS.Model<TenantAttributes, TenantCreationAttrib
       });
   }
 
-  static async readOne(id: number, options: Omit<SQLZ.FindOptions<TenantAttributes>, 'where'>): Promise<Tenant | null> {
+  static async readOne(
+    id: number,
+    options?: Omit<SQLZ.FindOptions<TenantAttributes>, 'where'>,
+  ): Promise<Tenant | null> {
     return this.schema(schema)
       .findByPk(id, {
         nest: true,
@@ -74,7 +77,7 @@ export class Tenant extends SQLZ_TS.Model<TenantAttributes, TenantCreationAttrib
       });
   }
 
-  static async readAll(query: ListQuery, options: SQLZ.FindOptions<SQLZ.Attributes<Tenant>>): Promise<Tenant[]> {
+  static async readAll(query: ListQuery, options?: SQLZ.FindOptions<SQLZ.Attributes<Tenant>>): Promise<Tenant[]> {
     let { page, count, sort, dir, q } = query;
 
     page ||= 1;
@@ -104,7 +107,7 @@ export class Tenant extends SQLZ_TS.Model<TenantAttributes, TenantCreationAttrib
   static async modify(
     id: number,
     values: TenantAttributes,
-    options: Omit<SQLZ.UpdateOptions<SQLZ.Attributes<Tenant>>, 'returning' | 'where'>,
+    options?: Omit<SQLZ.UpdateOptions<SQLZ.Attributes<Tenant>>, 'returning' | 'where'>,
   ): Promise<[number, Tenant[]]> {
     return this.schema(schema)
       .update(values, {
@@ -118,7 +121,7 @@ export class Tenant extends SQLZ_TS.Model<TenantAttributes, TenantCreationAttrib
       });
   }
 
-  static async remove(id: number, options: SQLZ.DestroyOptions<SQLZ.Attributes<Tenant>>): Promise<number> {
+  static async remove(id: number, options?: SQLZ.DestroyOptions<SQLZ.Attributes<Tenant>>): Promise<number> {
     return this.schema(schema)
       .destroy({
         where: { id },

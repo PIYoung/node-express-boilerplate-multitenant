@@ -60,7 +60,7 @@ export class User extends SQLZ_TS.Model<UserAttributes, UserCreationAttributes> 
 
   static async write(
     values: UserCreationAttributes,
-    options: SQLZ.CreateOptions<SQLZ.Attributes<User>>,
+    options?: SQLZ.CreateOptions<SQLZ.Attributes<User>>,
   ): Promise<User> {
     return this.schema(schema)
       .create(values, {
@@ -73,7 +73,7 @@ export class User extends SQLZ_TS.Model<UserAttributes, UserCreationAttributes> 
       });
   }
 
-  static async readOne(id: number, options: Omit<SQLZ.FindOptions<UserAttributes>, 'where'>): Promise<User | null> {
+  static async readOne(id: number, options?: Omit<SQLZ.FindOptions<UserAttributes>, 'where'>): Promise<User | null> {
     return this.schema(schema)
       .findByPk(id, {
         nest: true,
@@ -86,7 +86,7 @@ export class User extends SQLZ_TS.Model<UserAttributes, UserCreationAttributes> 
       });
   }
 
-  static async readAll(query: ListQuery, options: SQLZ.FindOptions<SQLZ.Attributes<User>>): Promise<User[]> {
+  static async readAll(query: ListQuery, options?: SQLZ.FindOptions<SQLZ.Attributes<User>>): Promise<User[]> {
     let { page, count, sort, dir } = query;
 
     page ||= 1;
@@ -112,7 +112,7 @@ export class User extends SQLZ_TS.Model<UserAttributes, UserCreationAttributes> 
   static async modify(
     id: number,
     values: UserAttributes,
-    options: Omit<SQLZ.UpdateOptions<SQLZ.Attributes<User>>, 'returning' | 'where'>,
+    options?: Omit<SQLZ.UpdateOptions<SQLZ.Attributes<User>>, 'returning' | 'where'>,
   ): Promise<[number, User[]]> {
     return this.schema(schema)
       .update(values, {
@@ -126,7 +126,7 @@ export class User extends SQLZ_TS.Model<UserAttributes, UserCreationAttributes> 
       });
   }
 
-  static async remove(id: number, options: SQLZ.DestroyOptions<SQLZ.Attributes<User>>): Promise<number> {
+  static async remove(id: number, options?: SQLZ.DestroyOptions<SQLZ.Attributes<User>>): Promise<number> {
     return this.schema(schema)
       .destroy({
         where: { id },
