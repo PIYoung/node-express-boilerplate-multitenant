@@ -6,12 +6,13 @@ import { UserInfo } from './user-info.model';
 
 interface UserRoleAttributes {
   id: number;
+  roleId: number;
   userInfoId: number;
   createdAt: Date;
   updatedAt: Date;
   deletedAt?: Date;
   userInfo: UserInfo;
-  roles: Role[];
+  role: Role;
 }
 
 type UserRoleOmitAttributes = 'id' | 'createdAt' | 'updatedAt' | 'deletedAt';
@@ -23,6 +24,10 @@ export class UserRole extends SQLZ.Model<UserRoleAttributes, UserRoleCreationAtt
   @SQLZ.AutoIncrement
   @SQLZ.Column(SQLZ.DataType.INTEGER)
   override readonly id!: number;
+
+  @SQLZ.ForeignKey(() => Role)
+  @SQLZ.Column(SQLZ.DataType.INTEGER)
+  readonly roleId!: number;
 
   @SQLZ.ForeignKey(() => UserInfo)
   @SQLZ.Column(SQLZ.DataType.INTEGER)
@@ -40,6 +45,6 @@ export class UserRole extends SQLZ.Model<UserRoleAttributes, UserRoleCreationAtt
   @SQLZ.BelongsTo(() => UserInfo)
   readonly userInfo!: UserInfo;
 
-  @SQLZ.HasMany(() => Role)
-  readonly roles?: Role[];
+  @SQLZ.BelongsTo(() => Role)
+  readonly role!: Role;
 }

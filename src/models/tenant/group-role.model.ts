@@ -7,11 +7,12 @@ import { Role } from './role.model';
 interface GroupRoleAttributes {
   id: number;
   groupId: number;
+  roleId: number;
   createdAt: Date;
   updatedAt: Date;
   deletedAt?: Date;
   group: Group;
-  roles: Role[];
+  role: Role;
 }
 
 type GroupRoleOmitAttributes = 'id' | 'createdAt' | 'updatedAt' | 'deletedAt';
@@ -28,6 +29,10 @@ export class GroupRole extends SQLZ.Model<GroupRoleAttributes, GroupRoleCreation
   @SQLZ.Column(SQLZ.DataType.INTEGER)
   readonly groupId!: number;
 
+  @SQLZ.ForeignKey(() => Role)
+  @SQLZ.Column(SQLZ.DataType.INTEGER)
+  readonly roleId!: number;
+
   @SQLZ.CreatedAt
   override readonly createdAt!: Date;
 
@@ -40,6 +45,6 @@ export class GroupRole extends SQLZ.Model<GroupRoleAttributes, GroupRoleCreation
   @SQLZ.BelongsTo(() => Group)
   readonly group!: Group;
 
-  @SQLZ.HasMany(() => Role)
-  readonly roles?: Role[];
+  @SQLZ.BelongsTo(() => Role)
+  readonly role!: Role;
 }

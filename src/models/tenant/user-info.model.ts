@@ -9,6 +9,9 @@ import { UserRole } from './user-role.model';
 
 interface UserInfoAttributes {
   id: number;
+  name: string;
+  email: string;
+  phone: string;
   userId: number;
   createdAt: Date;
   updatedAt: Date;
@@ -30,6 +33,20 @@ export class UserInfo extends SQLZ.Model<UserInfoAttributes, UserInfoCreationAtt
   @SQLZ.Column(SQLZ.DataType.INTEGER)
   override readonly id!: number;
 
+  @SQLZ.AllowNull(false)
+  @SQLZ.Column(SQLZ.DataType.STRING)
+  readonly name!: string;
+
+  @SQLZ.Unique(true)
+  @SQLZ.AllowNull(false)
+  @SQLZ.Column(SQLZ.DataType.STRING)
+  readonly email!: string;
+
+  @SQLZ.Unique(true)
+  @SQLZ.AllowNull(false)
+  @SQLZ.Column(SQLZ.DataType.STRING)
+  readonly phone!: string;
+
   @SQLZ.ForeignKey(() => User)
   @SQLZ.Column(SQLZ.DataType.INTEGER)
   readonly userId!: number;
@@ -49,12 +66,12 @@ export class UserInfo extends SQLZ.Model<UserInfoAttributes, UserInfoCreationAtt
   @SQLZ.HasMany(() => Comment)
   readonly comments?: Comment[];
 
+  @SQLZ.HasMany(() => GroupUser)
+  readonly groupUsers?: GroupUser[];
+
   @SQLZ.HasMany(() => Post)
   readonly posts?: Post[];
 
   @SQLZ.HasMany(() => UserRole)
   readonly userRoles?: UserRole[];
-
-  @SQLZ.HasMany(() => GroupUser)
-  readonly groupUsers?: GroupUser[];
 }

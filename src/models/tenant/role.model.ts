@@ -7,13 +7,14 @@ import { UserRole } from './user-role.model';
 
 interface RoleAttributes {
   id: number;
-  groupRoleId: number;
-  userRoleId: number;
+  code: string;
+  name: string;
+  description: string;
   createdAt: Date;
   updatedAt: Date;
   deletedAt?: Date;
-  groupRole: GroupRole;
-  userRole: UserRole;
+  groupRoles: GroupRole[];
+  userRoles: UserRole[];
   permissionRoles?: PermissionRole[];
 }
 
@@ -27,15 +28,18 @@ export class Role extends SQLZ.Model<RoleAttributes, RoleCreationAttributes> {
   @SQLZ.Column(SQLZ.DataType.INTEGER)
   override readonly id!: number;
 
-  @SQLZ.AllowNull(true)
-  @SQLZ.ForeignKey(() => GroupRole)
-  @SQLZ.Column(SQLZ.DataType.INTEGER)
-  readonly groupRoleId?: number;
+  @SQLZ.AllowNull(false)
+  @SQLZ.Unique(true)
+  @SQLZ.Column(SQLZ.DataType.STRING)
+  readonly code!: string;
 
-  @SQLZ.AllowNull(true)
-  @SQLZ.ForeignKey(() => UserRole)
-  @SQLZ.Column(SQLZ.DataType.INTEGER)
-  readonly userRoleId?: number;
+  @SQLZ.AllowNull(false)
+  @SQLZ.Column(SQLZ.DataType.STRING)
+  readonly name!: string;
+
+  @SQLZ.AllowNull(false)
+  @SQLZ.Column(SQLZ.DataType.STRING)
+  readonly description!: string;
 
   @SQLZ.CreatedAt
   override readonly createdAt!: Date;
@@ -46,11 +50,11 @@ export class Role extends SQLZ.Model<RoleAttributes, RoleCreationAttributes> {
   @SQLZ.DeletedAt
   override readonly deletedAt!: Date;
 
-  @SQLZ.BelongsTo(() => GroupRole)
-  readonly groupRole?: GroupRole;
+  @SQLZ.HasMany(() => GroupRole)
+  readonly groupRoles?: GroupRole[];
 
-  @SQLZ.BelongsTo(() => UserRole)
-  readonly userRole?: UserRole;
+  @SQLZ.HasMany(() => UserRole)
+  readonly userRoles?: UserRole[];
 
   @SQLZ.HasMany(() => PermissionRole)
   readonly permissionRoles?: PermissionRole[];

@@ -5,6 +5,10 @@ import { PermissionRole } from './permission-role.model';
 
 interface PermissionAttributes {
   id: number;
+  target: string;
+  read: boolean;
+  write: boolean;
+  remove: boolean;
   createdAt: Date;
   updatedAt: Date;
   deletedAt?: Date;
@@ -20,6 +24,25 @@ export class Permission extends SQLZ.Model<PermissionAttributes, PermissionCreat
   @SQLZ.AutoIncrement
   @SQLZ.Column(SQLZ.DataType.INTEGER)
   override readonly id!: number;
+
+  @SQLZ.AllowNull(false)
+  @SQLZ.Column(SQLZ.DataType.STRING)
+  readonly target!: string;
+
+  @SQLZ.AllowNull(false)
+  @SQLZ.Default(false)
+  @SQLZ.Column(SQLZ.DataType.BOOLEAN)
+  readonly read!: boolean;
+
+  @SQLZ.AllowNull(false)
+  @SQLZ.Default(false)
+  @SQLZ.Column(SQLZ.DataType.BOOLEAN)
+  readonly write!: boolean;
+
+  @SQLZ.AllowNull(false)
+  @SQLZ.Default(false)
+  @SQLZ.Column(SQLZ.DataType.BOOLEAN)
+  readonly remove!: boolean;
 
   @SQLZ.CreatedAt
   override readonly createdAt!: Date;
