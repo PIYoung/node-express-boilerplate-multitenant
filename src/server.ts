@@ -18,18 +18,20 @@ const readMemory = () => {
 };
 
 const bootstrap = async () => {
-  try {
-    const port = Number(process.env['PORT']) || 3000;
+  const port = Number(process.env['PORT']) || 3000;
 
-    await connectPostgres();
+  await connectPostgres();
 
-    app.listen(port, () => {
-      logger.info(`🚀 Server is running on port ${port}`);
-      logger.info(`🚀 Starting server... ${readMemory()}`);
-    });
-  } catch (err) {
-    logger.error(err);
-  }
+  const server = app.listen(port, () => {
+    logger.info(`🚀 Server is running on port ${port}`);
+    logger.info(`🚀 Starting server... ${readMemory()}`);
+  });
+
+  process.on('SIGINT', () => {
+    logger.info(`👻 Server is shutting down...`);
+    server.close();
+    process.exit(0);
+  });
 };
 
 configDotenv();
