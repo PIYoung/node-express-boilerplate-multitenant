@@ -1,6 +1,23 @@
-import Sequelize from 'sequelize';
-import { Strategy } from 'passport-local';
+import { Strategy as JwtStrategy, ExtractJwt, StrategyOptions, VerifyCallback } from 'passport-jwt';
 
-import logger from './logger.config';
+import { User } from '../models/main/user.model';
 
-// export const strategy = new Strategy();
+const strategyOptions: StrategyOptions = {
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  secretOrKey: process.env['JWT_SECRET'] || 'jwt-secret',
+  ignoreExpiration: false,
+};
+
+const verify: VerifyCallback = async (payload, done) => {
+  try {
+    const user = await User.readOne(payload.id);
+
+    if (!user) return done(null, false);
+
+    return done(null, user);
+  } catch (error) {
+    done(error, false);
+  }
+};
+
+export const jwtStrategy = new JwtStrategy(strategyOptions, verify);
