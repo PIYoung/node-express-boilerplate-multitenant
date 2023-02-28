@@ -1,6 +1,6 @@
 import { ModelCtor, Sequelize } from 'sequelize-typescript';
 
-import { ALL_SCHEMAS, DEFAULT_MAIN_SCHEMA, getTenantSchema, createSchema } from '../../configs/schema.config';
+import { ALL_SCHEMAS, getTenantSchema, createSchema } from '../../configs/schema.config';
 import { Tenant } from '../main/tenant.model';
 import { Comment } from './comment.model';
 import { GroupRole } from './group-role.model';
@@ -45,7 +45,7 @@ const syncModels = async (seq: Sequelize, tenant: Tenant) => {
 };
 
 export const generateTenantModels = async (seq: Sequelize, tenantName: string, tenantDescription: string) => {
-  const tenant = await Tenant.schema(DEFAULT_MAIN_SCHEMA).create({
+  const tenant = await Tenant.write({
     name: tenantName,
     description: tenantDescription,
   });
@@ -54,13 +54,10 @@ export const generateTenantModels = async (seq: Sequelize, tenantName: string, t
 };
 
 export const generateDefaultTenantModels = async (seq: Sequelize) => {
-  const tenant = await Tenant.schema(DEFAULT_MAIN_SCHEMA).findOrCreate({
-    where: { id: 1 },
-    defaults: {
-      name: 'Default Tenant',
-      description: 'Default Tenant',
-    },
+  const tenant = await Tenant.readOrWrite(1, {
+    name: 'Default Tenant',
+    description: 'Default Tenant',
   });
 
-  await syncModels(seq, tenant[0]);
+  await syncModels(seq, tenant);
 };

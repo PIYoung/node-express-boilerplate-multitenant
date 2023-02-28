@@ -61,6 +61,17 @@ export class Tenant extends SQLZ_TS.Model<TenantAttributes, TenantCreationAttrib
       });
   }
 
+  static async readOrWrite(id: number, defaults: TenantCreationAttributes): Promise<Tenant> {
+    const result = await this.schema(schema)
+      .findOrCreate({ where: { id }, defaults })
+      .catch((error) => {
+        logger.error(error);
+        throw error;
+      });
+
+    return result[0];
+  }
+
   static async readOne(
     id: number,
     options?: Omit<SQLZ.FindOptions<TenantAttributes>, 'where'>,
