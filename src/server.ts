@@ -1,4 +1,3 @@
-import app from './configs/express.config';
 import logger from './configs/logger.config';
 import { connectPostgres } from './configs/postgres.config';
 import { configDotenv } from './configs/dotenv.config';
@@ -18,6 +17,8 @@ const readMemory = () => {
 };
 
 const bootstrap = async () => {
+  // lazy import required to avoid dotenv config before it's loaded
+  const app = (await import('./configs/express.config')).default;
   const port = Number(process.env['PORT']) || 3000;
 
   await connectPostgres();

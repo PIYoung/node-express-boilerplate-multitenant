@@ -2,14 +2,15 @@ import express from 'express';
 import compression from 'compression';
 import cors from 'cors';
 import helmet from 'helmet';
-import morgan from 'morgan';
 import passport from 'passport';
 
+import loggerMorgan from './morgan.config';
 import apiRouter from '../routes';
+import { jwtStrategy } from './passport.config';
 
 const app = express();
 
-app.use(morgan('dev'));
+app.use(loggerMorgan);
 
 app.use(compression());
 app.use(cors());
@@ -19,6 +20,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(passport.initialize());
+passport.use(jwtStrategy);
 
 app.use('/', apiRouter);
 
